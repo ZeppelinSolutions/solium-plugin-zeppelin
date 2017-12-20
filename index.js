@@ -11,6 +11,7 @@ module.exports = {
     },
 
     rules: {
-        "no-arithmetic-operations": require("./rules/no-arithmetic-operations")
+        "no-arithmetic-operations": require("./rules/no-arithmetic-operations"),
+        "no-unused-imports": require("./rules/no-unused-imports")
     }
 };
