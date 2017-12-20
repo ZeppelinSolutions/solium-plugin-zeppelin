@@ -1,0 +1,36 @@
+{
+  "name": "solium-plugin-zeppelin",
+  "version": "0.0.1",
+  "description": "Solium plugin for Zeppelin audits",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --require should --reporter spec --recursive",
+    "lint": "eslint rules/ test/ index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elopio/solium-plugin-zeppelin.git"
+  },
+  "keywords": [
+    "solium",
+    "soliumplugin",
+    "solidity",
+    "zeppelin"
+  ],
+  "author": "Leo Arias <yo@elopio.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elopio/solium-plugin-zeppelin/issues"
+  },
+  "homepage": "https://github.com/elopio/solium-plugin-zeppelin#readme",
+  "peerDependencies": {
+    "solium": "^1.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "should": "^13.1.3",
+    "solium": "^1.1.0"
+  },
+  "dependencies": {}
+}
