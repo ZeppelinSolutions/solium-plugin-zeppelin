@@ -21,10 +21,11 @@ In the .soliumrc.json file, add:
         ]
     }
 
-## Maintainer
+## Maintainers
 
-@elopio
-@facuspagnuolo
+[@elopio](https://github.com/elopio)
+
+[@facuspagnuolo](https://github.com/facuspagnuolo)
 
 ## Contribute
 
