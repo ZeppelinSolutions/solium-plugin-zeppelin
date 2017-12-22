@@ -19,6 +19,9 @@ In the .soliumrc.json file, add:
         "zeppelin/no-arithmetic-operations": [
           "warning"
         ],
+        "zeppelin/constant-candidates": [
+          "warning"
+        ],
         "zeppelin/no-unused-imports": [
           "warning"
         ]
