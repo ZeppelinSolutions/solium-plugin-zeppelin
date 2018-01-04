@@ -6,6 +6,9 @@
 
 "use strict";
 
+let fs = require("fs");
+let solparse = require("solparse");
+
 module.exports = {
     meta: {
         docs: {
@@ -25,13 +28,25 @@ module.exports = {
                 return;
             }
             const node = emitted.node;
-            if (node.symbols.length > 0) {
-                // TODO for now, ignore the imports like `import "./file";`
-                // In order to see if those imports are used, the imported file
-                // has to be parsed to collect the symbols that it exports.
-                // --elopio - 2017-12-20
-                imports[node.from] = node;
+            if (node.symbols.length === 0) {
+                // Global import.
+                // Parse the file and collect the exported symbols.
+                node.symbols = [];
+                let data = fs.readFileSync(node.from, "utf-8");
+                let ast = solparse.parse(data, { comment: true });
+                ast.body.forEach(statement => {
+                    if (statement.type === "ContractStatement" ||
+                            statement.type === "InterfaceStatement" ||
+                            statement.type === "LibraryStatement") {
+                        node.symbols.push({
+                            "type": "GlobalImportSymbol",
+                            "name": statement.name,
+                            "alias": statement.name
+                        });
+                    }
+                });
             }
+            imports[node.from] = node;
         }
 
         function inspectContractStatement(emitted) {
@@ -60,6 +75,28 @@ module.exports = {
             });
         }
 
+        function inspectStateVariableDeclaration(emitted) {
+            if (emitted.exit) {
+                return;
+            }
+            const node = emitted.node;
+            Object.keys(imports).forEach(function(from) {
+                // Check if members from imported symbols are used.
+                updateUsedSymbol(imports[from], node.literal.literal);
+            });
+        }
+
+        function inspectUsingStatement(emitted) {
+            if (emitted.exit) {
+                return;
+            }
+            const node = emitted.node;
+            Object.keys(imports).forEach(function(from) {
+                // Check if members from imported symbols are used.
+                updateUsedSymbol(imports[from], node.library);
+            });
+        }
+
         /**
          * updateUsedSymbol() checks if a symbol comes from an imported file.
          * If so, the symbol is removed from the list of imported symbols to check.
@@ -67,11 +104,17 @@ module.exports = {
          * is removed from the list to check.
         */
         function updateUsedSymbol(importNode, usedSymbolName) {
-            let symbols = importNode.symbols;
-            symbols.some(function(symbol, index) {
+            importNode.symbols.some(function(symbol, index) {
                 if (symbol.alias === usedSymbolName) {
-                    symbols.splice(index, 1);
-                    if (symbols.length === 0) {
+                    importNode.symbols.splice(index, 1);
+                    if (symbol.type === "GlobalImportSymbol") {
+                        // If one globally imported symbol is used, it means
+                        // that the import is used, so there is no need to check
+                        // the rest.
+                        importNode.symbols = importNode.symbols.filter(
+                            symbol => symbol.type !== "GlobalImportSymbol");
+                    }
+                    if (importNode.symbols.length === 0) {
                         delete imports[importNode.from];
                     }
                     return true;
@@ -106,6 +149,8 @@ module.exports = {
             ImportStatement: inspectImportStatement,
             ContractStatement: inspectContractStatement,
             MemberExpression: inspectMemberExpression,
+            StateVariableDeclaration: inspectStateVariableDeclaration,
+            UsingStatement: inspectUsingStatement,
             Program: inspectProgram
         };
     }
