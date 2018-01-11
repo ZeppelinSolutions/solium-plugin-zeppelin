@@ -12,6 +12,7 @@ module.exports = {
 
     rules: {
         "no-arithmetic-operations": require("./rules/no-arithmetic-operations"),
+        "constant-candidates": require("./rules/constant-candidates")
         "no-unused-imports": require("./rules/no-unused-imports")
     }
 };
