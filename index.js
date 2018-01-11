@@ -12,6 +12,7 @@ module.exports = {
 
     rules: {
         "no-arithmetic-operations": require("./rules/no-arithmetic-operations"),
+        "missing-natspec-comments": require("./rules/missing-natspec-comments"),
         "no-unused-imports": require("./rules/no-unused-imports")
     }
 };
