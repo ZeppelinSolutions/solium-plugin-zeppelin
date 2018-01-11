@@ -40,4 +40,4 @@ To set up for development, see the [HACKING](HACKING.md) file.
 
 ## License
 
-[MIT](LICENSE) © 2017 [OpenZeppelin](https://openzeppelin.org/)
+[MIT](LICENSE) © 2017-2018 [OpenZeppelin](https://openzeppelin.org/)
