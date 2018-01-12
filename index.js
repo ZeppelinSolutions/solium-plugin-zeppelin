@@ -12,6 +12,7 @@ module.exports = {
 
     rules: {
         "no-arithmetic-operations": require("./rules/no-arithmetic-operations"),
+        "no-state-variable-shadowing": require("./rules/no-state-variable-shadowing"),
         "no-unused-imports": require("./rules/no-unused-imports")
     }
 };
