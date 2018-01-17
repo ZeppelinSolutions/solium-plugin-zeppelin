@@ -11,8 +11,12 @@ module.exports = {
     },
 
     rules: {
+        "constant-candidates": require("./rules/constant-candidates"),
+        "highlight-comments": require("./rules/highlight-comments"),
+        "missing-natspec-comments": require("./rules/missing-natspec-comments"),
         "no-arithmetic-operations": require("./rules/no-arithmetic-operations"),
         "no-state-variable-shadowing": require("./rules/no-state-variable-shadowing"),
+        "no-unchecked-send": require("./rules/no-unchecked-send"),
         "no-unused-imports": require("./rules/no-unused-imports")
     }
 };
