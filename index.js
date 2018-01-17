@@ -11,8 +11,10 @@ module.exports = {
     },
 
     rules: {
-        "no-arithmetic-operations": require("./rules/no-arithmetic-operations"),
+        "constant-candidates": require("./rules/constant-candidates"),
         "missing-natspec-comments": require("./rules/missing-natspec-comments"),
+        "no-arithmetic-operations": require("./rules/no-arithmetic-operations"),
+        "no-unchecked-send": require("./rules/no-unchecked-send"),
         "no-unused-imports": require("./rules/no-unused-imports")
     }
 };

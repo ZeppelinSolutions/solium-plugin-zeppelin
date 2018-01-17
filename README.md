@@ -16,10 +16,16 @@ In the .soliumrc.json file, add:
       ...
       "rules": {
         ...
+        "zeppelin/constant-candidates": [
+          "warning"
+        ],
+        "zeppelin/missing-natspec-comments": [          
+          "warning"
+        ],
         "zeppelin/no-arithmetic-operations": [
           "warning"
         ],
-        "zeppelin/missing-natspec-comments": [
+        "zeppelin/no-unchecked-send": [
           "warning"
         ],
         "zeppelin/no-unused-imports": [
