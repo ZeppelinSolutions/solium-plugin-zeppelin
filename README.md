@@ -22,6 +22,9 @@ In the .soliumrc.json file, add:
         "zeppelin/no-arithmetic-operations": [
           "warning"
         ],
+        "zeppelin/no-modifiers-without-revert": [
+          "warning"
+        ],
         "zeppelin/no-unchecked-send": [
           "warning"
         ],
