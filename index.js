@@ -12,6 +12,7 @@ module.exports = {
 
     rules: {
         "constant-candidates": require("./rules/constant-candidates"),
+        "highlight-comments": require("./rules/highlight-comments"),
         "missing-natspec-comments": require("./rules/missing-natspec-comments"),
         "no-arithmetic-operations": require("./rules/no-arithmetic-operations"),
         "no-unchecked-send": require("./rules/no-unchecked-send"),
