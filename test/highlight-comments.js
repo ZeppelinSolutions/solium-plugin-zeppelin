@@ -23,6 +23,12 @@ describe("[RULE] highlight-comments: Rejections", function() {
     it("should comments with highlights", function(done) {
         let scenarios = [
             {
+                highlightComment: "AUDIT",
+                code: "// AUDIT dummy comment."
+            }, {
+                highlightComment: "AUDIT",
+                code: "/* AUDIT dummy comment.\n*/"
+            }, {
                 highlightComment: "FIXME",
                 code: "// FIXME dummy comment."
             }, {

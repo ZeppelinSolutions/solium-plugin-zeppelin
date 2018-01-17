@@ -4,7 +4,7 @@
 
 "use strict";
 
-const HIGHLIGHT_COMMENTS = ["FIXME", "TODO", "XXX"];
+const HIGHLIGHT_COMMENTS = ["AUDIT", "FIXME", "TODO", "XXX"];
 
 module.exports = {
     meta: {
