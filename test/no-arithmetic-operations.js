@@ -41,7 +41,6 @@ describe("[RULE] no-arithmetic-operations: Rejections", function() {
         done();
     });
 
-
     it("should reject contracts using - operator", function(done) {
         let code = toContract("function test_sum () { uint a = 4 - 2; }"),
             errors = Solium.lint(code, userConfig);
