@@ -16,7 +16,13 @@ In the .soliumrc.json file, add:
       ...
       "rules": {
         ...
+        "zeppelin/constant-candidates": [
+          "warning"
+        ],
         "zeppelin/no-arithmetic-operations": [
+          "warning"
+        ],
+        "zeppelin/no-unchecked-send": [
           "warning"
         ],
         "zeppelin/no-unused-imports": [
@@ -40,4 +46,4 @@ To set up for development, see the [HACKING](HACKING.md) file.
 
 ## License
 
-[MIT](LICENSE) © 2017 [OpenZeppelin](https://openzeppelin.org/)
+[MIT](LICENSE) © 2017-2018 [OpenZeppelin](https://openzeppelin.org/)
