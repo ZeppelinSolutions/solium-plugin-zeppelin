@@ -9,7 +9,7 @@ module.exports = {
         docs: {
             recommended: true,
             type: "warning",
-            description: "Disallow modifiers without revert"
+            description: "Warn on modifiers without revert"
         },
         schema: []
     },
