@@ -13,6 +13,7 @@ module.exports = {
     rules: {
         "constant-candidates": require("./rules/constant-candidates"),
         "no-arithmetic-operations": require("./rules/no-arithmetic-operations"),
+        "no-modifiers-without-revert": require("./rules/no-modifiers-without-revert"),
         "no-unchecked-send": require("./rules/no-unchecked-send"),
         "no-unused-imports": require("./rules/no-unused-imports")
     }
