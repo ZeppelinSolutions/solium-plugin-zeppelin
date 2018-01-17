@@ -19,6 +19,9 @@ In the .soliumrc.json file, add:
         "zeppelin/constant-candidates": [
           "warning"
         ],
+        "zeppelin/missing-natspec-comments": [          
+          "warning"
+        ],
         "zeppelin/no-arithmetic-operations": [
           "warning"
         ],
