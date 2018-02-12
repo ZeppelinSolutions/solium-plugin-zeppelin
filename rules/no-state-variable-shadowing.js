@@ -73,11 +73,18 @@ module.exports = {
             // --elopio - 20180111
             for (let index = 0; index < parents.length; index ++) {
                 let parent = parents[index];
-                if (contracts[parent].stateVariables.includes(stateVariable)) {
-                    return parent;
-                } else {
-                    return findStateVariableInParent(
-                        contracts, stateVariable, contracts[parent].parents);
+                if (contracts[parent] !== undefined) {
+                    if (contracts[parent].stateVariables.includes(stateVariable)) {
+                        return parent;
+                    } else {
+                        return findStateVariableInParent(
+                            contracts, stateVariable, contracts[parent].parents);
+                    }
+                }
+                else {
+                    // The parent is from an external import, not yet supported.
+                    // https://github.com/elopio/solium-plugin-zeppelin/issues/19
+                    return undefined;
                 }
             }
         }
