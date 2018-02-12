@@ -37,7 +37,7 @@ module.exports = {
             // - it is:
             //   - a literal or,
             //   - a call to keccak256, sha256, ripemd160, ecrecover, addmod or mulmod.
-            return !node.is_constant && node.visibility === "private" &&
+            return !node.is_constant && node.visibility === "private" && node.value !== null &&
                 (isLiteral(node.value) ||
                  (node.value.type === "CallExpression" &&
                   (node.value.callee.name === "keccak256" ||
