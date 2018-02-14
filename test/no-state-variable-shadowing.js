@@ -112,4 +112,18 @@ describe("[RULE] no-state-variable-shadowing: Acceptances", function() {
         done();
     });
 
+    it("should ignore contract from global import", function(done) {
+        let code = "import './Dummy.sol';\n" +
+            "contract Dummy is TestImportedContract {\n" +
+            "  uint testVariable;\n" +
+            "}",
+            errors = Solium.lint(addPragma(code), userConfig);
+
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(0);
+
+        done();
+    });
+
+
 });
