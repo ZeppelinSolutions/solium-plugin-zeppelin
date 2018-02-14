@@ -51,6 +51,16 @@ describe("[RULE] constant-candidates: Acceptances", function() {
 
         done();
     });
+
+    it("should accept private state variable without value", function(done) {
+        let code = toContract("uint private testVar;"),
+            errors = Solium.lint(code, userConfig);
+
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(0);
+
+        done();
+    });
 });
 
 describe("[RULE] constant-candidates: Rejections", function() {
