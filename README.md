@@ -8,7 +8,10 @@
 
 ## Install
 
-TODO: transfer the npm package from duaraghav8 to zeppelin, and publish.
+```
+$ npm install -g solium
+$ npm install -g solium-plugin-zeppelin
+```
 
 ## Usage
 
