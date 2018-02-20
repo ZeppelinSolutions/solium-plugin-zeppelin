@@ -32,19 +32,30 @@ module.exports = {
                 // Global import.
                 // Parse the file and collect the exported symbols.
                 node.symbols = [];
-                let data = fs.readFileSync(node.from, "utf-8");
-                let ast = solparse.parse(data, { comment: true });
-                ast.body.forEach(statement => {
-                    if (statement.type === "ContractStatement" ||
-                            statement.type === "InterfaceStatement" ||
-                            statement.type === "LibraryStatement") {
-                        node.symbols.push({
-                            "type": "GlobalImportSymbol",
-                            "name": statement.name,
-                            "alias": statement.name
-                        });
-                    }
-                });
+                if (fs.existsSync(node.from)) {
+                    let data = fs.readFileSync(node.from, "utf-8");
+                    let ast = solparse.parse(data, { comment: true });
+                    ast.body.forEach(statement => {
+                        if (statement.type === "ContractStatement" ||
+                                statement.type === "InterfaceStatement" ||
+                                statement.type === "LibraryStatement") {
+                            node.symbols.push({
+                                "type": "GlobalImportSymbol",
+                                "name": statement.name,
+                                "alias": statement.name
+                            });
+                        }
+                    });
+                } else {
+                    // If the imported file doesn't exist, that's probably
+                    // because the path where solium is being executed is not
+                    // the same as the one where the contract is stored.
+                    // TODO use node.from relative to the path of the file
+                    // being analyzed.
+                    // See https://github.com/OpenZeppelin/solium-plugin-zeppelin/issues/21
+                    // --elopio - 2018-03-20
+                    return;
+                }
             }
             imports[node.from] = node;
         }

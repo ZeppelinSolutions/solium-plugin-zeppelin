@@ -149,6 +149,16 @@ describe("[RULE] no-unused-imports: Acceptances", function() {
 
         done();
     });
+
+    it("should ignore global import of unexisting file", function(done) {
+        let importCode = "import './TestUnexistingImported.sol';",
+            errors = Solium.lint(addPragma(importCode), userConfig);
+
+        errors.constructor.name.should.equal("Array");
+        errors.length.should.equal(0);
+
+        done();
+    });
 });
 
 describe("[RULE] no-unused-imports: Rejections", function() {
