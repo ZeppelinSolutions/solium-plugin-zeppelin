@@ -2,7 +2,7 @@
 
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-[![Travis](https://img.shields.io/travis/elopio/solium-plugin-zeppelin.svg?style=flat-square&branch=master)](https://travis-ci.org/elopio/solium-plugin-zeppelin)
+[![Travis](https://img.shields.io/travis/solium-plugin-zeppelin/solium-plugin-zeppelin.svg?style=flat-square&branch=master)](https://travis-ci.org/solium-plugin-zeppelin/solium-plugin-zeppelin)
 
 > Solium plugin for Zeppelin audits
 
