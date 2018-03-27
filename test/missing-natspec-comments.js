@@ -122,21 +122,7 @@ describe("[RULE] missing-natspec-comments: Rejections", function() {
             "/**\n" +
             " Natspec comment without title.\n" +
             " */\n" +
-            "library TestStatement {}",
-
-            "/// @title dummy comment.\n" +
-            "contract DummyContract {\n" +
-            "    /// Natspec comment without title\n" +
-            "    function TestStatement() {}\n" +
-            "}",
-
-            "/// @title dummy comment.\n" +
-            "contract DummyContract {\n" +
-            "    /**\n" +
-            "     Natspec comment without title.\n" +
-            "     */\n" +
-            "    function TestStatement() {}\n" +
-            "}"
+            "library TestStatement {}"
         ];
         scenarios.forEach(code => {
             let errors = Solium.lint(addPragma(code), userConfig);
@@ -200,6 +186,34 @@ describe("[RULE] missing-natspec-comments: Acceptances", function() {
             "    /**\n" +
             "     @title Natspec comment with title.\n" +
             "    */\n" +
+            "    function TestStatement() {}\n" +
+            "}"
+        ];
+        scenarios.forEach(code => {
+            let errors = Solium.lint(addPragma(code), userConfig);
+
+            errors.constructor.name.should.equal("Array");
+            errors.length.should.equal(0);
+        });
+
+        done();
+    });
+
+    // Regression test for
+    // https://github.com/OpenZeppelin/solium-plugin-zeppelin/issues/24
+    it("should accept functions without natspec title", function(done) {
+        let scenarios = [
+            "/// @title dummy comment.\n" +
+            "contract DummyContract {\n" +
+            "    /// Natspec comment without title\n" +
+            "    function TestStatement() {}\n" +
+            "}",
+
+            "/// @title dummy comment.\n" +
+            "contract DummyContract {\n" +
+            "    /**\n" +
+            "     Natspec comment without title.\n" +
+            "     */\n" +
             "    function TestStatement() {}\n" +
             "}"
         ];

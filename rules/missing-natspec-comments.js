@@ -58,7 +58,7 @@ module.exports = {
                             node: node,
                             message: `'${node.name}' has no natspec comment.`
                         });
-                    } else if (!hasTitle(comment)) {
+                    } else if (requiresTitle(node.type) && !hasTitle(comment)) {
                         context.report({
                             node: node,
                             message: `'${node.name}' has no natspec title comment.`
@@ -136,6 +136,12 @@ module.exports = {
         function isNatspecComment(comment) {
             return comment.text.startsWith("///") ||
                 comment.text.startsWith("/**");
+        }
+
+        function requiresTitle(type) {
+            return type === "ContractStatement" ||
+                type === "InterfaceStatement" ||
+                type === "LibraryStatement";
         }
 
         function hasTitle(comment) {
