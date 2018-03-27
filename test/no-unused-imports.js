@@ -36,8 +36,7 @@ describe("[RULE] no-unused-imports: Acceptances", function() {
                 contract Dummy is TestImportedContract {}`,
             errors = Solium.lint(addPragma(code), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -48,8 +47,7 @@ describe("[RULE] no-unused-imports: Acceptances", function() {
                 contract Dummy1 is Dummy2, TestImportedContract {}`,
             errors = Solium.lint(addPragma(code), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -60,8 +58,7 @@ describe("[RULE] no-unused-imports: Acceptances", function() {
             contract Dummy is TestImportedContract1, TestImportedContract2 {}`,
             errors = Solium.lint(addPragma(code), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -72,8 +69,7 @@ describe("[RULE] no-unused-imports: Acceptances", function() {
                 contract Dummy is TestImportedContract {}`,
             errors = Solium.lint(addPragma(code), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -84,8 +80,7 @@ describe("[RULE] no-unused-imports: Acceptances", function() {
                 contract Dummy {int dummy = TestImportedContract.dummy();}`,
             errors = Solium.lint(addPragma(code), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -96,8 +91,7 @@ describe("[RULE] no-unused-imports: Acceptances", function() {
                 contract Dummy {using TestImportedLibrary for Dummy;}`,
             errors = Solium.lint(addPragma(code), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -110,8 +104,7 @@ describe("[RULE] no-unused-imports: Acceptances", function() {
                 contract Dummy is TestImportedContract {}`,
             errors = Solium.lint(addPragma(importCode), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -124,8 +117,7 @@ describe("[RULE] no-unused-imports: Acceptances", function() {
                 contract Dummy is TestImportedInterface {}`,
             errors = Solium.lint(addPragma(importCode), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -140,8 +132,7 @@ describe("[RULE] no-unused-imports: Acceptances", function() {
             }`,
             errors = Solium.lint(addPragma(importCode), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -156,8 +147,7 @@ describe("[RULE] no-unused-imports: Acceptances", function() {
             contract Dummy is TestImportedContract1 {}`,
             errors = Solium.lint(addPragma(importCode), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -166,8 +156,7 @@ describe("[RULE] no-unused-imports: Acceptances", function() {
         let importCode = "import './TestUnexistingImported.sol';",
             errors = Solium.lint(addPragma(importCode), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -192,7 +181,7 @@ describe("[RULE] no-unused-imports: Rejections", function() {
             contract Dummy {}`,
             errors = Solium.lint(addPragma(code), userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
         errors[0].message.should.equal(
             "Unused imported symbol 'TestImportedContract' from './TestFile.sol'.");
@@ -208,7 +197,7 @@ describe("[RULE] no-unused-imports: Rejections", function() {
             contract Dummy {}`,
             errors = Solium.lint(addPragma(importCode), userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
         errors[0].message.should.equal(
             "Unused imported symbol 'TestImportedContract' from './test-tmp/TestImported.sol'.");

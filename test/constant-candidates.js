@@ -26,8 +26,7 @@ describe("[RULE] constant-candidates: Acceptances", function() {
         let code = toContract("uint constant testVar = 10;"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -36,8 +35,7 @@ describe("[RULE] constant-candidates: Acceptances", function() {
         let code = toContract("uint testVar = 10;"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -48,8 +46,7 @@ describe("[RULE] constant-candidates: Acceptances", function() {
                 function testFunc() {testVar = 5;}`),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -58,8 +55,7 @@ describe("[RULE] constant-candidates: Acceptances", function() {
         let code = toContract("uint private testVar;"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -76,7 +72,7 @@ describe("[RULE] constant-candidates: Rejections", function() {
         let code = toContract("uint private testVar = 10;"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
         errors[0].message.should.equal(
             "The state variable 'testVar' could be constant.");
@@ -88,7 +84,7 @@ describe("[RULE] constant-candidates: Rejections", function() {
         let code = toContract("string private testVar = 'test';"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
         errors[0].message.should.equal(
             "The state variable 'testVar' could be constant.");
@@ -100,7 +96,7 @@ describe("[RULE] constant-candidates: Rejections", function() {
         let code = toContract("uint private testVar = 1 * 1 + 5;"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
         errors[0].message.should.equal(
             "The state variable 'testVar' could be constant.");
@@ -112,7 +108,7 @@ describe("[RULE] constant-candidates: Rejections", function() {
         let code = toContract("bytes32 private testVar = keccak256('test');"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
         errors[0].message.should.equal(
             "The state variable 'testVar' could be constant.");
@@ -124,7 +120,7 @@ describe("[RULE] constant-candidates: Rejections", function() {
         let code = toContract("bytes32 private testVar = sha256('test');"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
         errors[0].message.should.equal(
             "The state variable 'testVar' could be constant.");
@@ -136,7 +132,7 @@ describe("[RULE] constant-candidates: Rejections", function() {
         let code = toContract("bytes32 private testVar = ripemd160('test');"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
         errors[0].message.should.equal(
             "The state variable 'testVar' could be constant.");
@@ -148,7 +144,7 @@ describe("[RULE] constant-candidates: Rejections", function() {
         let code = toContract("address private testVar = ecrecover('dummy', 1, 'dummy', 'dummy');"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
         errors[0].message.should.equal(
             "The state variable 'testVar' could be constant.");
@@ -160,7 +156,7 @@ describe("[RULE] constant-candidates: Rejections", function() {
         let code = toContract("uint256 private testVar = addmod(1, 1, 1);"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
         errors[0].message.should.equal(
             "The state variable 'testVar' could be constant.");
@@ -172,7 +168,7 @@ describe("[RULE] constant-candidates: Rejections", function() {
         let code = toContract("uint256 private testVar = mulmod(1, 1, 1);"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
         errors[0].message.should.equal(
             "The state variable 'testVar' could be constant.");

@@ -25,7 +25,7 @@ describe("[RULE] no-arithmetic-operations: Rejections", function() {
         let code = toContract("function test_sum () { uint a = 4 * 2; }"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
 
         done();
@@ -35,7 +35,7 @@ describe("[RULE] no-arithmetic-operations: Rejections", function() {
         let code = toContract("function test_sum () { uint a = 4 / 2; }"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
 
         done();
@@ -45,7 +45,7 @@ describe("[RULE] no-arithmetic-operations: Rejections", function() {
         let code = toContract("function test_sum () { uint a = 4 - 2; }"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
 
         done();
@@ -55,7 +55,7 @@ describe("[RULE] no-arithmetic-operations: Rejections", function() {
         let code = toContract("function test_sum () { uint a = 4 + 2; }"),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
 
         done();
