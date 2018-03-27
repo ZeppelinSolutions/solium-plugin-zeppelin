@@ -4,6 +4,7 @@
 
 "use strict";
 
+let dedent = require("dedent");
 let Solium = require("solium");
 let wrappers = require("./utils/wrappers");
 let toContract = wrappers.toContract;
@@ -42,8 +43,9 @@ describe("[RULE] constant-candidates: Acceptances", function() {
     });
 
     it("should accept private state variable with mutation", function(done) {
-        let code = toContract("uint private testVar = 10;\n" +
-                              "function testFunc() {testVar = 5;}"),
+        let code = toContract(dedent`
+                uint private testVar = 10;
+                function testFunc() {testVar = 5;}`),
             errors = Solium.lint(code, userConfig);
 
         errors.constructor.name.should.equal("Array");

@@ -7,6 +7,8 @@
 
 "use strict";
 
+let dedent = require("dedent");
+
 module.exports = {
 
     /**
@@ -15,9 +17,14 @@ module.exports = {
      * @return {String}      wrapped snippet
      */
     toContract: function(code) {
-        let pre = "pragma solidity ^0.4.3;\n\n\ncontract Wrap {\n\t";
-        let post = "\n}";
-        return pre + code + post;
+        return dedent`
+            pragma solidity ^0.4.3;
+
+
+            contract Wrap {
+                ${code}
+            }
+            `;
     },
 
     /**
@@ -26,7 +33,9 @@ module.exports = {
      * @return {String}      snippet with pragma statement.
      */
     addPragma: function(code) {
-        let pre = "pragma solidity ^0.4.3;\n\n\n";
-        return pre + code;
+        return dedent`
+            pragma solidity ^0.4.3;
+
+            ${code}`;
     }
 };

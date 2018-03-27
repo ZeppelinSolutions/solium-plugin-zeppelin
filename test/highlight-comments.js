@@ -4,6 +4,7 @@
 
 "use strict";
 
+let dedent = require("dedent");
 let Solium = require("solium");
 let wrappers = require("./utils/wrappers");
 let addPragma = wrappers.addPragma;
@@ -27,25 +28,33 @@ describe("[RULE] highlight-comments: Rejections", function() {
                 code: "// AUDIT dummy comment."
             }, {
                 highlightComment: "AUDIT",
-                code: "/* AUDIT dummy comment.\n*/"
+                code: dedent`
+                    /* AUDIT dummy comment.
+                     */`
             }, {
                 highlightComment: "FIXME",
                 code: "// FIXME dummy comment."
             }, {
                 highlightComment: "FIXME",
-                code: "/* FIXME dummy comment.\n*/"
+                code: dedent`
+                    /* FIXME dummy comment.
+                     */`
             }, {
                 highlightComment: "TODO",
                 code: "// TODO dummy comment."
             }, {
                 highlightComment: "TODO",
-                code: "/* TODO dummy comment.\n*/"
+                code: dedent`
+                    /* TODO dummy comment.
+                     */`
             }, {
                 highlightComment: "XXX",
                 code: "// XXX dummy comment."
             }, {
                 highlightComment: "XXX",
-                code: "/* XXX dummy comment.\n*/"
+                code: dedent`
+                    /* XXX dummy comment.
+                     */`
             }
         ];
         scenarios.forEach(scenario => {
@@ -69,7 +78,9 @@ describe("[RULE] highlight-comments: Acceptances", function() {
     it("should accept comments without highlights", function(done) {
         let scenarios = [
             "// dummy comment.",
-            "/* dummy comment.\n*/"
+            dedent`
+                /* dummy comment.
+                 */`
         ];
 
         scenarios.forEach(code => {
