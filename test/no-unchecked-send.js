@@ -30,8 +30,7 @@ describe("[RULE] no-unchecked-send: Acceptances", function() {
                 }`),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -44,8 +43,7 @@ describe("[RULE] no-unchecked-send: Acceptances", function() {
                 }`),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -57,8 +55,7 @@ describe("[RULE] no-unchecked-send: Acceptances", function() {
                 }`),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -70,8 +67,7 @@ describe("[RULE] no-unchecked-send: Acceptances", function() {
                 }`),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -83,8 +79,7 @@ describe("[RULE] no-unchecked-send: Acceptances", function() {
                 }`),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -96,8 +91,7 @@ describe("[RULE] no-unchecked-send: Acceptances", function() {
                 }`),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -109,7 +103,7 @@ describe("[RULE] no-unchecked-send: Rejections", function() {
                 function test(address to) { to.send(); }`),
             errors = Solium.lint(code, userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
 
         Solium.reset();

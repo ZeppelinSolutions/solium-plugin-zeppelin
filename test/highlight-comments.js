@@ -60,7 +60,7 @@ describe("[RULE] highlight-comments: Rejections", function() {
         scenarios.forEach(scenario => {
             let errors = Solium.lint(addPragma(scenario.code), userConfig);
 
-            errors.constructor.name.should.equal("Array");
+            errors.should.be.instanceof(Array);
             errors.length.should.equal(1);
             errors[0].message.should.equal(`'${scenario.highlightComment}' comment.`);
         });
@@ -86,8 +86,7 @@ describe("[RULE] highlight-comments: Acceptances", function() {
         scenarios.forEach(code => {
             let errors = Solium.lint(addPragma(code), userConfig);
 
-            errors.constructor.name.should.equal("Array");
-            errors.length.should.equal(0);
+            errors.should.deepEqual([]);
         });
 
         done();

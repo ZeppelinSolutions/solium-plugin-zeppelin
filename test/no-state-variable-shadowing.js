@@ -32,7 +32,7 @@ describe("[RULE] no-state-variable-shadowing: Rejections", function() {
             }`,
             errors = Solium.lint(addPragma(code), userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
         errors[0].message.should.equal(dedent`
             'TestContract' shadows the state variable 'testVariable' \
@@ -52,7 +52,7 @@ describe("[RULE] no-state-variable-shadowing: Rejections", function() {
             }`,
             errors = Solium.lint(addPragma(code), userConfig);
 
-        errors.constructor.name.should.equal("Array");
+        errors.should.be.instanceof(Array);
         errors.length.should.equal(1);
         errors[0].message.should.equal(dedent`
             'TestContract' shadows the state variable 'testVariable' \
@@ -77,8 +77,7 @@ describe("[RULE] no-state-variable-shadowing: Acceptances", function() {
             }`,
             errors = Solium.lint(addPragma(code), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -93,8 +92,7 @@ describe("[RULE] no-state-variable-shadowing: Acceptances", function() {
             }`,
             errors = Solium.lint(addPragma(code), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -112,8 +110,7 @@ describe("[RULE] no-state-variable-shadowing: Acceptances", function() {
             }`,
             errors = Solium.lint(addPragma(code), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
@@ -126,8 +123,7 @@ describe("[RULE] no-state-variable-shadowing: Acceptances", function() {
             }`,
             errors = Solium.lint(addPragma(code), userConfig);
 
-        errors.constructor.name.should.equal("Array");
-        errors.length.should.equal(0);
+        errors.should.deepEqual([]);
 
         done();
     });
