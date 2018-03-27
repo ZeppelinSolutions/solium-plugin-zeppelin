@@ -4,6 +4,7 @@
 
 "use strict";
 
+let dedent = require("dedent");
 let Solium = require("solium");
 let wrappers = require("./utils/wrappers");
 let addPragma = wrappers.addPragma;
@@ -22,38 +23,40 @@ describe("[RULE] no-state-variable-shadowing: Rejections", function() {
     });
 
     it("should reject direct inheritance shadowing on same file", function(done) {
-        let code = "contract TestParentContract {\n" +
-            "    uint testVariable;\n" +
-            "}\n" +
-            "contract TestContract is TestParentContract {\n" +
-            "    uint testVariable;\n" +
-            "}",
+        let code = dedent`
+            contract TestParentContract {
+                uint testVariable;
+            }
+            contract TestContract is TestParentContract {
+                uint testVariable;
+            }`,
             errors = Solium.lint(addPragma(code), userConfig);
 
         errors.constructor.name.should.equal("Array");
         errors.length.should.equal(1);
-        errors[0].message.should.equal(
-            "'TestContract' shadows the state variable 'testVariable' " +
-                "defined in the parent contract 'TestParentContract'.");
+        errors[0].message.should.equal(dedent`
+            'TestContract' shadows the state variable 'testVariable' \
+            defined in the parent contract 'TestParentContract'.`);
 
         done();
     });
 
     it("should reject transitive inheritance shadowing on same file", function(done) {
-        let code = "contract TestGrandParentContract {\n" +
-            "    uint testVariable;\n" +
-            "}\n" +
-            "contract TestParentContract is TestGrandParentContract {}\n" +
-            "contract TestContract is TestParentContract {\n" +
-            "    uint testVariable;\n" +
-            "}",
+        let code = dedent`
+            contract TestGrandParentContract {
+                uint testVariable;
+            }
+            contract TestParentContract is TestGrandParentContract {}
+            contract TestContract is TestParentContract {
+                uint testVariable;
+            }`,
             errors = Solium.lint(addPragma(code), userConfig);
 
         errors.constructor.name.should.equal("Array");
         errors.length.should.equal(1);
-        errors[0].message.should.equal(
-            "'TestContract' shadows the state variable 'testVariable' " +
-                "defined in the parent contract 'TestGrandParentContract'.");
+        errors[0].message.should.equal(dedent`
+            'TestContract' shadows the state variable 'testVariable' \
+            defined in the parent contract 'TestGrandParentContract'.`);
 
         done();
     });
@@ -68,9 +71,10 @@ describe("[RULE] no-state-variable-shadowing: Acceptances", function() {
     });
 
     it("should accept contracts without inheritance", function(done) {
-        let code = "contract TestContract {\n" +
-            "    uint testVariable;\n" +
-            "}",
+        let code = dedent`
+            contract TestContract {
+                uint testVariable;
+            }`,
             errors = Solium.lint(addPragma(code), userConfig);
 
         errors.constructor.name.should.equal("Array");
@@ -80,12 +84,13 @@ describe("[RULE] no-state-variable-shadowing: Acceptances", function() {
     });
 
     it("should accept contracts with inheritance without shadowing", function(done) {
-        let code = "contract ParentTestContract {\n" +
-            "    uint testVariable;\n" +
-            "}\n" +
-            "contract TestContract is ParentTestContract {\n" +
-            "    uint testVariable2;\n" +
-            "}",
+        let code = dedent`
+            contract ParentTestContract {
+                uint testVariable;
+            }
+            contract TestContract is ParentTestContract {
+                uint testVariable2;
+            }`,
             errors = Solium.lint(addPragma(code), userConfig);
 
         errors.constructor.name.should.equal("Array");
@@ -95,15 +100,16 @@ describe("[RULE] no-state-variable-shadowing: Acceptances", function() {
     });
 
     it("should accept contracts with transitive inheritance without shadowing", function(done) {
-        let code = "contract GrandParentTestContract {\n" +
-            "    uint testVariable;\n" +
-            "}\n" +
-            "contract ParentTestContract is GrandParentTestContract {\n" +
-            "    uint testVariable2;\n" +
-            "}\n" +
-            "contract TestContract is ParentTestContract {\n" +
-            "    uint testVariable3;\n" +
-            "}",
+        let code = dedent`
+            contract GrandParentTestContract {
+                uint testVariable;
+            }
+            contract ParentTestContract is GrandParentTestContract {
+                uint testVariable2;
+            }
+            contract TestContract is ParentTestContract {
+                uint testVariable3;
+            }`,
             errors = Solium.lint(addPragma(code), userConfig);
 
         errors.constructor.name.should.equal("Array");
@@ -113,10 +119,11 @@ describe("[RULE] no-state-variable-shadowing: Acceptances", function() {
     });
 
     it("should ignore contract from global import", function(done) {
-        let code = "import './Dummy.sol';\n" +
-            "contract Dummy is TestImportedContract {\n" +
-            "  uint testVariable;\n" +
-            "}",
+        let code = dedent`
+            import './Dummy.sol';
+            contract Dummy is TestImportedContract {
+                uint testVariable;
+            }`,
             errors = Solium.lint(addPragma(code), userConfig);
 
         errors.constructor.name.should.equal("Array");

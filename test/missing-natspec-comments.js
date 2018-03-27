@@ -4,6 +4,7 @@
 
 "use strict";
 
+let dedent = require("dedent");
 let Solium = require("solium");
 let wrappers = require("./utils/wrappers");
 let addPragma = wrappers.addPragma;
@@ -29,10 +30,11 @@ describe("[RULE] missing-natspec-comments: Rejections", function() {
 
             "library TestStatement {}",
 
-            "/// @title valid natspec comment\n" +
-            "contract Dummy {\n" +
-            "    function TestStatement() {}\n" +
-            "}"
+            dedent`
+                /// @title valid natspec comment
+                contract Dummy {
+                    function TestStatement() {}
+                }`
         ];
         scenarios.forEach(code => {
             let errors = Solium.lint(addPragma(code), userConfig);
@@ -48,43 +50,51 @@ describe("[RULE] missing-natspec-comments: Rejections", function() {
 
     it("should reject statements without natspec comments", function(done) {
         let scenarios = [
-            "// Not a natspec comment.\n" +
-            "contract TestStatement {}",
+            dedent`
+                // Not a natspec comment.
+                contract TestStatement {}`,
 
-            "/*\n" +
-            " Not a natspec comment.\n" +
-            " */\n" +
-            "contract TestStatement {}",
+            dedent`
+                /*
+                 * Not a natspec comment.
+                 */
+                contract TestStatement {}`,
 
-            "// Not a natspec comment.\n" +
-            "interface TestStatement {}",
+            dedent`
+                // Not a natspec comment.
+                interface TestStatement {}`,
 
-            "/*\n" +
-            " Not a natspec comment.\n" +
-           " */\n" +
-            "interface TestStatement {}",
+            dedent`
+                /*
+                 * Not a natspec comment.
+                 */
+                interface TestStatement {}`,
 
-            "// Not a natspec comment.\n" +
-            "library TestStatement {}",
+            dedent`
+                // Not a natspec comment.
+                library TestStatement {}`,
 
-            "/*\n" +
-            " Not a natspec comment.\n" +
-            " */\n" +
-            "library TestStatement {}",
+            dedent`
+                /*
+                 * Not a natspec comment.
+                 */
+                library TestStatement {}`,
 
-            "/// @title valid natspec comment.\n" +
-            "contract DummyContract {\n" +
-            "    // Not a natspec comment.\n" +
-            "    function TestStatement() {}\n" +
-            "}",
+            dedent`
+                /// @title valid natspec comment.
+                contract DummyContract {
+                    // Not a natspec comment.
+                    function TestStatement() {}
+                }`,
 
-            "/// @title valid natspec comment.\n" +
-            "contract DummyContract {\n" +
-            "    /*\n" +
-            "     Not a natspec comment.\n" +
-            "     */\n" +
-            "    function TestStatement() {}\n" +
-            "}"
+            dedent`
+                /// @title valid natspec comment.
+                contract DummyContract {
+                    /*
+                     * Not a natspec comment.
+                     */
+                    function TestStatement() {}
+                }`
         ];
         scenarios.forEach(code => {
             let errors = Solium.lint(addPragma(code), userConfig);
@@ -100,29 +110,35 @@ describe("[RULE] missing-natspec-comments: Rejections", function() {
 
     it("should reject statements without natspec title", function(done) {
         let scenarios = [
-            "/// Natspec comment without title.\n" +
-            "contract TestStatement {}",
+            dedent`
+                /// Natspec comment without title.
+                contract TestStatement {}`,
 
-            "/**\n" +
-            " Natspec comment without title.\n" +
-            " */\n" +
-            "contract TestStatement {}",
+            dedent`
+               /**
+                * Natspec comment without title.
+                */
+               contract TestStatement {}`,
 
-            "/// Natspec comment without title.\n" +
-            "interface TestStatement {}",
+            dedent`
+                /// Natspec comment without title.
+                interface TestStatement {}`,
 
-            "/**\n" +
-            " Natspec comment without title.\n" +
-           " */\n" +
-            "interface TestStatement {}",
+            dedent`
+                /**
+                 * Natspec comment without title.
+                 */
+                interface TestStatement {}`,
 
-            "/// Natspec comment without title.\n" +
-            "library TestStatement {}",
+            dedent`
+                /// Natspec comment without title.
+                library TestStatement {}`,
 
-            "/**\n" +
-            " Natspec comment without title.\n" +
-            " */\n" +
-            "library TestStatement {}"
+            dedent`
+                /**
+                 * Natspec comment without title.
+                 */
+                library TestStatement {}`
         ];
         scenarios.forEach(code => {
             let errors = Solium.lint(addPragma(code), userConfig);
@@ -147,47 +163,56 @@ describe("[RULE] missing-natspec-comments: Acceptances", function() {
 
     it("should accept statements with natspec title", function(done) {
         let scenarios = [
-            "/// @title Natspec comment with title.\n" +
-            "contract TestContract {}",
+            dedent`
+                /// @title Natspec comment with title.
+                contract TestContract {}`,
 
-            "/// @title Natspec comment with title.\n" +
-            "/// extra comment.\n" +
-            "contract TestContract {}\n" +
+            dedent`
+                /// @title Natspec comment with title.
+                /// extra comment.
+                contract TestContract {}`,
 
-            "/**\n" +
-            " @title Natspec comment with title.\n" +
-            " */\n" +
-            "contract TestContract {}",
+            dedent`
+                /**
+                 * @title Natspec comment with title.
+                 */
+                contract TestContract {}`,
 
-            "/// @title Natspec comment with title.\n" +
-            "interface TestStatement {}",
+            dedent`
+                /// @title Natspec comment with title.
+                interface TestStatement {}`,
 
-            "/**\n" +
-            " @title Natspec comment with title.\n" +
-           " */\n" +
-            "interface TestStatement {}",
+            dedent`
+                /**
+                 * @title Natspec comment with title.
+                 */
+                interface TestStatement {}`,
 
-            "/// @title Natspec comment with title.\n" +
-            "library TestStatement {}",
+            dedent`
+                /// @title Natspec comment with title.
+                library TestStatement {}`,
 
-            "/**\n" +
-            " @title Natspec comment with title.\n" +
-            " */\n" +
-            "library TestStatement {}",
+            dedent`
+                /**
+                 * @title Natspec comment with title.
+                 */
+                library TestStatement {}`,
 
-            "/// @title valid natspec comment.\n" +
-            "contract DummyContract {\n" +
-            "    /// @title Natspec comment with title\n" +
-            "    function TestStatement() {}\n" +
-            "}",
+            dedent`
+                /// @title valid natspec comment.
+                contract DummyContract {
+                    /// @title Natspec comment with title
+                    function TestStatement() {}
+                }`,
 
-            "/// @title valid natspec comment.\n" +
-            "contract DummyContract {\n" +
-            "    /**\n" +
-            "     @title Natspec comment with title.\n" +
-            "    */\n" +
-            "    function TestStatement() {}\n" +
-            "}"
+            dedent`
+                /// @title valid natspec comment.
+                contract DummyContract {
+                    /**
+                     * @title Natspec comment with title.
+                     */
+                    function TestStatement() {}
+                }`
         ];
         scenarios.forEach(code => {
             let errors = Solium.lint(addPragma(code), userConfig);
@@ -203,19 +228,21 @@ describe("[RULE] missing-natspec-comments: Acceptances", function() {
     // https://github.com/OpenZeppelin/solium-plugin-zeppelin/issues/24
     it("should accept functions without natspec title", function(done) {
         let scenarios = [
-            "/// @title dummy comment.\n" +
-            "contract DummyContract {\n" +
-            "    /// Natspec comment without title\n" +
-            "    function TestStatement() {}\n" +
-            "}",
+            dedent`
+                /// @title dummy comment.
+                contract DummyContract {
+                    /// Natspec comment without title
+                    function TestStatement() {}
+                }`,
 
-            "/// @title dummy comment.\n" +
-            "contract DummyContract {\n" +
-            "    /**\n" +
-            "     Natspec comment without title.\n" +
-            "     */\n" +
-            "    function TestStatement() {}\n" +
-            "}"
+            dedent`
+                /// @title dummy comment.
+                contract DummyContract {
+                    /**
+                     * Natspec comment without title.
+                     */
+                    function TestStatement() {}
+                }`
         ];
         scenarios.forEach(code => {
             let errors = Solium.lint(addPragma(code), userConfig);

@@ -34,6 +34,7 @@
     "solium": "^1.1.0"
   },
   "dependencies": {
+    "dedent": "^0.7.0",
     "eslint": "^4.13.1",
     "solparse": "^2.2.2",
     "util-deprecate": "^1.0.2"
