@@ -17,6 +17,7 @@ module.exports = {
         "no-arithmetic-operations": require("./rules/no-arithmetic-operations"),
         "no-state-variable-shadowing": require("./rules/no-state-variable-shadowing"),
         "no-unchecked-send": require("./rules/no-unchecked-send"),
-        "no-unused-imports": require("./rules/no-unused-imports")
+        "no-unused-imports": require("./rules/no-unused-imports"),
+        "internal-state-underscore-suffix": require("./rules/internal-state-underscore-suffix")
     }
 };
