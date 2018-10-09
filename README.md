@@ -42,6 +42,9 @@ In the .soliumrc.json file, add:
         "zeppelin/no-unused-imports": [
           "warning"
         ],
+        "zeppelin/functions-underscore-prefix": [
+          "warning"
+        ],
         "zeppelin/all-state-variables-private": [
           "warning"
         ]

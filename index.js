@@ -18,6 +18,7 @@ module.exports = {
         "no-state-variable-shadowing": require("./rules/no-state-variable-shadowing"),
         "no-unchecked-send": require("./rules/no-unchecked-send"),
         "no-unused-imports": require("./rules/no-unused-imports"),
+        "functions-underscore-prefix": require("./rules/functions-underscore-prefix"),
         "all-state-variables-private": require("./rules/all-state-variables-private")
     }
 };
